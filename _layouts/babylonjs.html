@@ -1,0 +1,67 @@
+---
+layout: default
+head_custom: babylonjs_head.html
+---
+
+{{ content }}
+
+
+<!-- Copied from https://doc.babylonjs.com/features/introductionToFeatures/chap1/first_app/ -->
+
+<canvas id="renderCanvas" touch-action="none"></canvas>
+<!-- touch-action="none" for best results from PEP -->
+
+<script>
+    const canvas = document.getElementById("renderCanvas"); // Get the canvas element
+
+    var engine = null;
+    var scene = null;
+    var sceneToRender = null;
+    var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+
+    // Add your code here matching the playground format
+    class Playground {
+        static async CreateScene(engine, canvas) {
+            {% if page.create_scene_file %}
+                {% include_relative {{ page.create_scene_file }} %}
+            {% else %}
+                {{ page.create_scene }}
+            {% endif %}
+        }
+    }
+    
+    createScene = function() { return Playground.CreateScene(engine, engine.getRenderingCanvas()); }
+    window.initFunction = async function() {
+        var asyncEngineCreation = async function() {
+            try {
+            return createDefaultEngine();
+            } catch(e) {
+            console.log("the available createEngine function failed. Creating the default engine instead");
+            return createDefaultEngine();
+            }
+        }
+        window.engine = await asyncEngineCreation();
+        
+        const engineOptions = window.engine.getCreationOptions();
+        if (engineOptions.audioEngine !== false) {
+            
+        }
+
+        if (!engine) throw 'engine should not be null.';
+
+        engine.runRenderLoop(function () {
+            if (sceneToRender && sceneToRender.activeCamera) {
+                sceneToRender.render();
+            }
+        });
+
+        window.scene = createScene();
+    };
+
+    initFunction().then(() => {scene.then(returnedScene => { sceneToRender = returnedScene; });});
+
+    // Resize
+    window.addEventListener("resize", function () {
+        engine.resize();
+    });
+</script>
