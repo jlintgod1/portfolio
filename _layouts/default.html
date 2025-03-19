@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
 
-{% seo %}
+    <meta name="robots" content="noindex, nofollow" /> <!-- Until we figure out how to host the website because I can't let AI train off my art -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     {% endif %}
   </head>
   <body>
-    <a id="skip-to-content" href="#content">Skip to the content.</a>
+    <a id="skip-to-content" href="#content">Skip to Content</a>
 
     <header class="page-header" role="banner">
       <h1 class="project-name"><a href={{'/' | relative_url}}>{{ site.title | default: site.github.repository_name }}</a></h1>

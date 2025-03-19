@@ -11,11 +11,21 @@ Jlintgod's WIP Portfolio. Currently contains placeholder content to test display
 <article class="gallery">
     {% endif %}
 
+    {% assign preview_url = "/assets/images/previews/" %}
+    {% if model.use_unknown_icon %}
+    {% assign preview_url = preview_url | append: "unknown.png" | relative_url %}
+    {% else %}
+    {% assign preview_url = preview_url | append: model.slug | append: ".png" | relative_url %}
+    {% endif %}
+
 <article class="gallery-item">
-<a href="{{ model.url | relative_url }}"> 
+<a href="{{ model.url | relative_url }}">
+<img src="{{preview_url}}" />
+<br>
 {{model.title}}
 </a>
 </article>
+
 
     {% if forloop.last or loopingIndex == 3 %}
 </article>

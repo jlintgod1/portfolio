@@ -1,5 +1,6 @@
 ---
 title: Cube 4
+use_unknown_icon: true
 layout: babylonjs
 create_scene:
     const scene = new BABYLON.Scene(engine);
