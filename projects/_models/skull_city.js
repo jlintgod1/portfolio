@@ -4,17 +4,6 @@ var scene = new BABYLON.Scene(engine);
 // This creates and positions a free camera (non-mesh)
 var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
 
-//var postProcess = new BABYLON.FxaaPostProcess("Make edges better", 1, camera);
-const ssao = new BABYLON.SSAO2RenderingPipeline("SSAOPipeline", scene, 0.75, [camera]);
-ssao.samples = 16;
-const ssr = new BABYLON.SSRRenderingPipeline("SSR", scene, [camera]);
-ssr.isEnabled = true;
-ssr.thickness = 0.2;
-ssr.blurDispersionStrength = 0.05;
-const taaRenderPipeline = new BABYLON.TAARenderingPipeline("taa", scene, [camera]);
-taaRenderPipeline.isEnabled = true;
-taaRenderPipeline.samples = 8;
-
 // This targets the camera to scene origin
 camera.setTarget(BABYLON.Vector3.Zero());
 // This attaches the camera to the canvas
@@ -53,4 +42,3 @@ for (i = 0; i < 64; i++) {
     randomDirection.y = i * 2;
     skyscraper.position = randomDirection;
 }
-return scene;

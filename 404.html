@@ -1,24 +1,83 @@
 ---
+layout: default
 permalink: /404.html
 ---
 
 <style type="text/css" media="screen">
+  @keyframes zoom {
+    from {
+      scale: 120%;
+    }
+
+    to {
+      scale: 80% 1;
+    }
+  }
+  
   .container {
     margin: 10px auto;
     max-width: 600px;
     text-align: center;
+
+    h1 {
+      margin: 30px 0;
+      font-size: 10em;
+      line-height: 1;
+      letter-spacing: -1px;
+      font-style: italic;
+
+      animation-name: zoom;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+    }
   }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
+
 </style>
 
 <div class="container">
   <h1>404</h1>
 
-  <p><strong>You're lost!!!</strong></p>
-  <p>The requested page could not be found.</p>
+  <strong><p id="message">You're lost!!!</p></strong>
+  <p>The requested page does not exist. Either that, or you're a few days too early of it existing.</p>
+  <a href={{'/' | relative_url}}>Return Home</a>
 </div>
+
+<script>
+  function getTheMessage() {
+    var randomIndex = Math.floor(Math.random() * 10);
+
+    switch (randomIndex) {
+      case 0:
+        return "You're lost!!!";
+      case 1:
+        return "Please(?) call a tech support";
+      case 2:
+        return "four hundred four";
+      case 3:
+        return "TURN BACK";
+      case 4:
+        return "Fatal Error!";
+      case 5:
+        return "Double check your URL."
+      case 6:
+        return "See above.";
+      case 7:
+        return "Maybe it's the way you're dressed?"
+      case 8:
+        return "Crossy forgot to write something down."
+      case 9:
+        return "Whoops";
+      case 10:
+        return "Don't blame the robot!"
+      default:
+        break;
+    }
+
+    return "i love broken randomization functions!!!";
+  }
+
+  document.getElementById("message").textContent = getTheMessage();
+
+</script>
